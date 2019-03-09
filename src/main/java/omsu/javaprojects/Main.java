@@ -1,7 +1,6 @@
 package omsu.javaprojects;
 
 import omsu.javaprojects.matrix.DemoMatrix;
-import omsu.javaprojects.matrix.IMatrix;
 import omsu.javaprojects.matrix.InvertableMatrix;
 import omsu.javaprojects.matrix.Matrix;
 
@@ -15,10 +14,10 @@ public class Main {
         Matrix matrix = new Matrix(3);
         DemoMatrix.scan(new FileInputStream("3x3.txt"), matrix);
         DemoMatrix.print(System.out, matrix);
-        System.out.println("matrix det: " + matrix.det());
-        System.out.println("matrix elem sum: " + DemoMatrix.getMatrixSum(matrix));
-        System.out.println("matrix row num: " + matrix.getRow());
-        System.out.println("matrix elem (1,2): " + matrix.get(1,2));
+      //  System.out.println("matrix det: " + matrix.det());
+      //  System.out.println("matrix elem sum: " + DemoMatrix.getMatrixSum(matrix));
+      //  System.out.println("matrix row num: " + matrix.getSize());
+      //  System.out.println("matrix elem (1,2): " + matrix.get(1,2));
         System.out.println("changing elem (1,2) to 99");
         matrix.set(1,2,99);
         System.out.println("Matrix with changed elem:");

@@ -3,7 +3,7 @@ package omsu.javaprojects.matrix;
 public interface IMatrix {
     double get(int row, int col);
 
-    int getRow();
+    int getSize();
 
     void set(int row, int col, double value);
 
