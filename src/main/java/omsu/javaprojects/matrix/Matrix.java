@@ -1,15 +1,16 @@
 package omsu.javaprojects.matrix;
 
+import java.io.*;
 import java.util.Arrays;
 
-public class Matrix implements IMatrix {
+public class Matrix implements IMatrix, Serializable {
     private double[] matrix;
     private int size;
     private boolean detFlag = false;
     private double detCache = 0;
 
-    public Matrix(int row){
-        if (row < 1) {
+    public Matrix(int row) {
+        if (row < 0) {
             throw new MatrixException();
         }
         this.size = row;
@@ -122,13 +123,14 @@ public class Matrix implements IMatrix {
         }
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Matrix)) return false;
         Matrix matrix1 = (Matrix) o;
         boolean isEquals = true;
-        for (int i=0; i <size*size && isEquals;i++) {
+        for (int i = 0; i < size * size && isEquals; i++) {
             isEquals = isEquals && Math.abs(this.matrix[i] - matrix1.matrix[i]) < 1e-10;
         }
         return isEquals;

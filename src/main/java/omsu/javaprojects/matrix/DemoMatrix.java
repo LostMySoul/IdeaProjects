@@ -46,20 +46,16 @@ public class DemoMatrix {
         writer.flush();
     }
 
-//    public void serializeMatrixToBinaryFile(Writer file) throws IOException {
-//        try (BufferedWriter bw = new BufferedWriter(file)) {
-//            Gson gson = new Gson();
-//            gson.toJson(this, bw);
-//        }
-//    }
-//
-//    public void deserializeMatrixFromBinaryFile(Reader file) throws IOException {
-//        try (BufferedReader br = new BufferedReader(file)) {
-//            Gson gson = new Gson();
-//            Matrix matrix = gson.fromJson(br, Matrix.class);
-//        } catch (Exception e) {
-//            System.out.println(e.getMessage());
-//        }
-//    }
 
+    public static void writeObject(FileOutputStream out, Matrix mx) throws IOException {
+        ObjectOutputStream oos = new ObjectOutputStream(out);
+        oos.writeObject(mx);
+        oos.flush();
+        oos.close();
+    }
+
+    public static Matrix readObject(FileInputStream in) throws IOException, ClassNotFoundException {
+        ObjectInputStream oin = new ObjectInputStream(in);
+        return (Matrix) oin.readObject();
+    }
 }
