@@ -1,0 +1,79 @@
+package omsu.javaprojects.model;
+
+import omsu.javaprojects.exceptions.IllegalAgeException;
+
+import java.util.Objects;
+
+public class Human {
+
+    private String surname, name, patronymic;
+    private int age;
+
+    public Human(String surname, String name, String patronymic, int age) throws IllegalAgeException {
+        if (age < 0) {
+            throw new IllegalAgeException();
+        }
+        this.surname = surname;
+        this.name = name;
+        this.patronymic = patronymic;
+        this.age = age;
+    }
+
+    public Human(Human human) {
+        this.name = human.name;
+        this.surname = human.surname;
+        this.patronymic = human.patronymic;
+        this.age = human.age;
+    }
+
+    public String getSurname() {
+        return this.surname;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getPatronymic() {
+        return this.patronymic;
+    }
+
+    public int getAge() {
+        return this.age;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPatronymic(String patronymic) {
+        this.patronymic = patronymic;
+    }
+
+    public void setAge(int age) throws IllegalAgeException {
+        if (age < 0) {
+            throw new IllegalAgeException();
+        }
+        this.age = age;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Human)) return false;
+        Human human = (Human) o;
+        return getAge() == human.getAge() &&
+                Objects.equals(getSurname(), human.getSurname()) &&
+                Objects.equals(getName(), human.getName()) &&
+                Objects.equals(getPatronymic(), human.getPatronymic());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getSurname(), getName(), getPatronymic(), getAge());
+    }
+}
