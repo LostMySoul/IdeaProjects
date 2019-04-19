@@ -19,7 +19,7 @@ public class Group {
             throw new IllegalIdException();
         }
         this.id = id;
-        int size = (int) (data.length);
+        int size = data.length;
         this.data = new int[size];
         for (int i = 0; i < data.length; i++) {
             this.data[i] = data[i];

@@ -19,23 +19,15 @@ public class PhoneBook {
             phones.add(number);
             phoneBook.put(human, phones);
         } else {
-            List<String> bobsPhones = phoneBook.get(human);
-            bobsPhones.add(number);
-            phoneBook.put(human, bobsPhones);
+            phoneBook.get(human).add(number);
         }
     }
 
     public void deletePhone(String number) {
-        Iterator<List<String>> iterValues = phoneBook.values().iterator();
         Iterator<Human> iterKeys = phoneBook.keySet().iterator();
-        Human someRichard;
-        List<String> allPhone;
-        while (iterValues.hasNext()) {
-            allPhone = iterValues.next();
-            someRichard = iterKeys.next();
-            if (allPhone.remove(number)) {
-                phoneBook.put(someRichard, allPhone);
-            }
+        while (iterKeys.hasNext()) {
+            Human human = iterKeys.next();
+            phoneBook.get(human).remove(number);
         }
     }
 
@@ -44,30 +36,26 @@ public class PhoneBook {
     }
 
     public Human findHumanWithPhone(String number) {
-        Human res = null;
-        Iterator<List<String>> iterValues = phoneBook.values().iterator();
         Iterator<Human> iterKeys = phoneBook.keySet().iterator();
-        Human temp;
-        List<String> allPhone;
-        boolean flag = true;
-        while (iterValues.hasNext() && flag) {
-            allPhone = iterValues.next();
-            temp = iterKeys.next();
+        while (iterKeys.hasNext()) {
+            Human temp = iterKeys.next();
+            List<String> allPhone = phoneBook.get(temp);
             if (allPhone.contains(number)) {
-                flag = false;
-                res = temp;
+                return temp;
             }
         }
-        return res;
+        return null;
     }
 
     public Map<Human, List<String>> getPhonesWithPeopleWhereSurnameStartsWith(String start) {
+        if (start == null) {
+            throw new IllegalArgumentException("start cannot be null");
+        }
         Map<Human, List<String>> res = new HashMap<>();
         Iterator<Human> iterKeys = phoneBook.keySet().iterator();
-        Human temp;
         while (iterKeys.hasNext()) {
-            temp = iterKeys.next();
-            if (temp.getSurname().length() > start.length() && temp.getSurname().startsWith(start)){
+            Human temp = iterKeys.next();
+            if (temp.getSurname().startsWith(start)) {
                 res.put(temp, getPhonesOfHuman(temp));
             }
         }

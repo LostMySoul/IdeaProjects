@@ -24,18 +24,14 @@ public class DataIterator implements Iterator<Integer> {
 
     @Override
     public Integer next() {
-        if (!hasNext()) {
-
-        }
         index++;
-        int res, currentIndex = index, i = 0;
-        for (i = 0; i < setOfGroups.length(); i++) {
+        int currentIndex = index;
+        int i = 0;
+        for (; i < setOfGroups.length(); i++) {
             if (currentIndex < setOfGroups.getGroups()[i].length()) {
                 break;
             }
-            if (currentIndex >= setOfGroups.getGroups()[i].length()) {
-                currentIndex -= setOfGroups.getGroups()[i].length();
-            }
+            currentIndex -= setOfGroups.getGroups()[i].length();
         }
         return setOfGroups.getGroups()[i].getData()[currentIndex];
     }

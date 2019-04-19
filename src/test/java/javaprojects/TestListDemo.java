@@ -80,34 +80,34 @@ public class TestListDemo {
         set.add(4);
         set.add(5);
         Set<Integer> set1 = new HashSet<>();//-
-        Set<Integer> set2 = new HashSet<>();//+
-        Set<Integer> set3 = new HashSet<>();//+
-        Set<Integer> set4 = new HashSet<>();//-
-        Set<Integer> set5 = new HashSet<>();//-
-        Set<Integer> set6 = new HashSet<>();//+
-        Set<Integer> set7 = new HashSet<>();//+
         set1.add(1);
         set1.add(9);
         set1.add(0);
         set1.add(91);
+        Set<Integer> set2 = new HashSet<>();//+
         set2.add(20);
         set2.add(12);
         set2.add(974);
         set2.add(87);
         set2.add(78);
         set2.add(45);
+        Set<Integer> set3 = new HashSet<>();//+
         set3.add(0);
+        Set<Integer> set4 = new HashSet<>();//-
         set4.add(1);
         set4.add(2);
         set4.add(3);
         set4.add(4);
         set4.add(5);
+        Set<Integer> set5 = new HashSet<>();//-
         set5.add(8);
         set5.add(10);
         set5.add(85);
         set5.add(18);
         set5.add(4);
         set5.add(102);
+        Set<Integer> set6 = new HashSet<>();//+
+        Set<Integer> set7 = new HashSet<>();//+
         set7.add(45);
         set7.add(123);
         set7.add(1234);
@@ -120,26 +120,12 @@ public class TestListDemo {
         list.add(set5);
         list.add(set6);
         list.add(set7);
-        list.add(set4);
-        list.add(set6);
-        list.add(set7);
-        list.add(set2);
-        list.add(set4);
-        list.add(set6);
-        list.add(set7);
-        list.add(set3);
         List<Set<Integer>> res = new ArrayList<>();
         res.add(set2);
         res.add(set3);
         res.add(set6);
         res.add(set7);
-        res.add(set6);
-        res.add(set7);
-        res.add(set2);
-        res.add(set6);
-        res.add(set7);
-        res.add(set3);
-        assertEquals(ListDemo.removeIntersectSets(list, set), res);
+        assertEquals(res, ListDemo.removeIntersectSets(list, set));
     }
 
     @Test
@@ -182,25 +168,25 @@ public class TestListDemo {
     public void testMakeListFromSet() {
         List<Human> res = new ArrayList<>();
         Set<Human> obj = new HashSet<>();
-        obj.add(new Human("Abcd", "Bbc", "Cdd", 18));
-        obj.add(new Human("Abcd", "Aac", "Cdd", 78));
-        obj.add(new Human("Abcd", "Abc", "Vdd", 178));
+        obj.add(new Human("A", "Bbc", "Cdd", 18));
+        obj.add(new Human("A", "Aac", "Cdd", 78));
+        obj.add(new Human("A", "Abc", "Vdd", 178));
         obj.add(new Human("Zebcd", "Abc", "Cdd", 14));
-        obj.add(new Human("Abcd", "Dbc", "Cdd", 32));
+        obj.add(new Human("A", "Dbc", "Cdd", 32));
         obj.add(new Human("Esbcd", "Abc", "Cdd", 8));
-        obj.add(new Student("Esbcd", "Abc", "Cdd", 87, "Ff"));
+        obj.add(new Student("Esbcd", "Abc", "DDD", 87, "Ff"));
         obj.add(new Student("Asbcd", "Abc", "Cdd", 82, "Fa"));
-        obj.add(new Human("Abcd", "Bbc", "Cdd", 7));
+        obj.add(new Human("A", "Bbc", "Cdd", 7));
         obj.add(new Student("Esbcd", "Abc", "Add", 28, "FE"));
-        res.add(new Human("Abcd", "Aac", "Cdd", 78));
-        res.add(new Human("Abcd", "Abc", "Vdd", 178));
-        res.add(new Human("Abcd", "Bbc", "Cdd", 18));
-        res.add(new Human("Abcd", "Bbc", "Cdd", 7));
-        res.add(new Human("Abcd", "Dbc", "Cdd", 32));
+        res.add(new Human("A", "Aac", "Cdd", 78));
+        res.add(new Human("A", "Abc", "Vdd", 178));
+        res.add(new Human("A", "Bbc", "Cdd", 18));
+        res.add(new Human("A", "Bbc", "Cdd", 7));
+        res.add(new Human("A", "Dbc", "Cdd", 32));
         res.add(new Student("Asbcd", "Abc", "Cdd", 82, "Fa"));
         res.add(new Student("Esbcd", "Abc", "Add", 28, "FE"));
         res.add(new Human("Esbcd", "Abc", "Cdd", 8));
-        res.add(new Student("Esbcd", "Abc", "Cdd", 87, "Ff"));
+        res.add(new Student("Esbcd", "Abc", "DDD", 87, "Ff"));
         res.add(new Human("Zebcd", "Abc", "Cdd", 14));
         assertEquals(ListDemo.makeListFromSet(obj), res);
     }
@@ -285,10 +271,65 @@ public class TestListDemo {
         input.add(h3);
         input.add(h4);
         input.add(h5);
-        List<Human> res = new ArrayList<>();
-        res.add(h1);
-        res.add(h3);
-        res.add(h4);
-        assertEquals(ListDemo.getWithAge(input, 30), res);
+        Map<Integer, List<Human>> map = new HashMap<>();
+
+        List<Human> temp = new ArrayList<>();
+        temp.add(h1);
+        temp.add(h4);
+        temp.add(h3);
+        map.put(30, temp);
+
+        temp = new ArrayList<>();
+        temp.add(h2);
+        map.put(22, temp);
+
+        temp = new ArrayList<>();
+        temp.add(h5);
+        map.put(53, temp);
+
+        assertEquals(ListDemo.getWithAge(input), map);
+    }
+
+    @Test
+    public void getWithAgeAndChar() {
+        Set<Human> input = new HashSet<>();
+        Human h1 = new Human("AAA", "AAA", "AAA", 30);
+        Human h2 = new Human("BBB", "BBB", "BBB", 22);
+        Human h3 = new Human("ACC", "CCC", "CCC", 30);
+        Human h4 = new Human("DDD", "DDD", "DDD", 30);
+        Human h5 = new Human("EEE", "EEE", "EEE", 53);
+        input.add(h1);
+        input.add(h2);
+        input.add(h3);
+        input.add(h4);
+        input.add(h5);
+        Map<Integer, Map<Character, List<Human>>> map = new HashMap<>();
+
+        List<Human> temp = new ArrayList<>();
+        temp.add(h3);
+        temp.add(h1);
+        Map<Character, List<Human>> charMap = new HashMap<>();
+        charMap.put('A',temp);
+        map.put(30, charMap);
+
+        temp = new ArrayList<>();
+        temp.add(h4);
+        charMap.put('D',temp);
+        map.put(30, charMap);
+
+
+        temp = new ArrayList<>();
+        temp.add(h2);
+        charMap = new HashMap<>();
+        charMap.put('B',temp);
+        map.put(22, charMap);
+
+        temp = new ArrayList<>();
+        temp.add(h5);
+        charMap = new HashMap<>();
+        charMap.put('E',temp);
+        map.put(53, charMap);
+
+        assertEquals(ListDemo.ageCharMap(input), map);
     }
 }

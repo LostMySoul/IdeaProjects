@@ -11,7 +11,7 @@ public class ListDemo {
     public static int getNumberOfStringWithChar(List<String> listOfString, char first) {
         int res = 0;
         for (int i = 0; i < listOfString.size(); i++) {
-            if (!listOfString.get(i).equals("")) {
+            if (listOfString.get(i) != null && !listOfString.get(i).equals("")) {
                 if (first == listOfString.get(i).charAt(0)) {
                     res++;
                 }
@@ -19,6 +19,7 @@ public class ListDemo {
         }
         return res;
     }
+
     public static List<Human> getListSameSurname(List<Human> humanList, Human human) {
         List<Human> result = new ArrayList<>();
         int pos = 0;
@@ -30,6 +31,7 @@ public class ListDemo {
         }
         return result;
     }
+
     public static List<Human> getListExcludeOne(List<Human> humanList, Human human) {
         List<Human> result = new ArrayList<>();
         int pos = 0;
@@ -41,97 +43,43 @@ public class ListDemo {
         }
         return result;
     }
+
     public static List<Set<Integer>> removeIntersectSets(List<Set<Integer>> setList, Set<Integer> set) {
         List<Set<Integer>> result = new ArrayList<>();
         int pos = 0;
         boolean flag = true;
         Iterator<Integer> iter;
         for (int i = 0; i < setList.size(); i++) {
-            iter = setList.get(i).iterator();
-            while (iter.hasNext() && flag) {
-                if (set.contains(iter.next())) {
-                    flag = false;
-                }
+            Set<Integer> temp = new HashSet<>(setList.get(i));
+            temp.retainAll(set);
+            if (temp.size() == 0) {
+                result.add(setList.get(i));
             }
-            if (flag) {
-                result.add(pos, setList.get(i));
-                pos++;
-            }
-            flag = true;
         }
         return result;
     }
+
     public static Set<Integer> getIdOfFullAged(Map<Integer, Human> mapId) {
         Set<Integer> result = new HashSet<>();
-        Iterator<Human> iterValues = mapId.values().iterator();
         Iterator<Integer> iterKeys = mapId.keySet().iterator();
-        Human temp;
         int id;
-        while (iterValues.hasNext()) {
-            temp = iterValues.next();
+        while (iterKeys.hasNext()) {
             id = iterKeys.next();
-            if (temp.getAge() >= 18) {
+            if (mapId.get(id).getAge() >= 18) {
                 result.add(id);
             }
         }
         return result;
     }
-    public static List<Human> makeListFromSet(Set<Human> humanSet) {
-        List<Human> result = new ArrayList<>();
-        int pos = 0;
-        int numberOfElem = 0;
-        boolean flag = true;
-        Iterator<Human> iter = humanSet.iterator();
-        Human someJohn;
-        while (iter.hasNext()) {
-            if (result.isEmpty()) {
-                result.add(0, iter.next());
-                numberOfElem++;
-            } else {
-                someJohn = iter.next();
-                while (flag) {
 
-                    if (result.get(pos).getSurname().compareTo(someJohn.getSurname()) > 0) {
-                        result.add(pos, someJohn);
-                        flag = false;
-                        numberOfElem++;
-                    } else {
-                        if ((result.get(pos).getSurname().compareTo(someJohn.getSurname()) == 0) &&
-                                result.get(pos).getName().compareTo(someJohn.getName()) > 0) {
-                            result.add(pos, someJohn);
-                            flag = false;
-                            numberOfElem++;
-                        } else {
-                            if (result.get(pos).getSurname().compareTo(someJohn.getSurname()) == 0 &&
-                                    result.get(pos).getName().compareTo(someJohn.getName()) == 0 &&
-                                    result.get(pos).getPatronymic().compareTo(someJohn.getPatronymic()) > 0) {
-                                result.add(pos, someJohn);
-                                flag = false;
-                                numberOfElem++;
-                            } else {
-                                if (result.get(pos).getSurname().compareTo(someJohn.getSurname()) == 0 &&
-                                        result.get(pos).getName().compareTo(someJohn.getName()) == 0 &&
-                                        result.get(pos).getPatronymic().compareTo(someJohn.getPatronymic()) == 0) {
-                                    result.add(pos, someJohn);
-                                    flag = false;
-                                    numberOfElem++;
-                                }
-                            }
-                        }
-                    }
-                    pos++;
-                    if (pos == numberOfElem) {
-                        result.add(pos, someJohn);
-                        flag = false;
-                        numberOfElem++;
-                    }
-                }
-                flag = true;
-                pos = 0;
-            }
-        }
-        return result;
+    public static List<Human> makeListFromSet(Set<Human> humanSet) {
+        return humanSet.stream().sorted((o1, o2) -> {
+            String fullname1 = o1.getSurname() + " " + o1.getName() + " " + o1.getPatronymic();
+            String fullname2 = o2.getSurname() + " " + o2.getName() + " " + o2.getPatronymic();
+            return fullname1.compareTo(fullname2);
+        }).collect(Collectors.toList());
     }
+
     public static Set<Human> identifyHumans(Map<Integer, Human> mapId, Set<Integer> setOfId) {
         Set<Human> result = new HashSet<>();
         Iterator<Integer> itr = setOfId.iterator();
@@ -144,6 +92,7 @@ public class ListDemo {
         }
         return result;
     }
+
     public static Set<Human> getSetOfOldest(List<Human> humanList) {
         Set<Human> result = new HashSet<>();
         int maxAge = 0;
@@ -159,17 +108,56 @@ public class ListDemo {
         }
         return result;
     }
+
     public static Map<Integer, Integer> getIdAgeMap(Map<Integer, Human> humanMap) {
-        List<Human> hlist = new ArrayList<>(humanMap.values());
         List<Integer> keys = new ArrayList<>(humanMap.keySet());
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < hlist.size(); i++) {
-            map.put(keys.get(i), hlist.get(i).getAge());
+        for (int i = 0; i < keys.size(); i++) {
+            map.put(keys.get(i), humanMap.get(keys.get(i)).getAge());
         }
         return map;
     }
-    public static List<Human> getWithAge(Set<Human> humanSet, int age) {
-        return humanSet.stream().filter(man -> man.getAge() == age)
-                .sorted((o1, o2) -> o1.getSurname().compareTo(o2.getSurname())).collect(Collectors.toList());
+
+    public static Map<Integer, List<Human>> getWithAge(Set<Human> humanSet) {
+        Map<Integer, List<Human>> res = new HashMap<>();
+        Iterator<Human> iter = humanSet.iterator();
+        while (iter.hasNext()) {
+            Human human = iter.next();
+            List<Human> temp = res.get(human.getAge());
+            if (temp == null) {
+                temp = new ArrayList<>();
+                temp.add(human);
+                res.put(human.getAge(), temp);
+            } else {
+                temp.add(human);
+            }
+        }
+        return res;
     }
+
+    public static Map<Integer, Map<Character, List<Human>>> ageCharMap(Set<Human> humanSet) {
+        Map<Integer, Map<Character, List<Human>>> res = new HashMap<>();
+        Map<Integer, List<Human>> ageMap = getWithAge(humanSet);
+        Iterator<Integer> keysIter = ageMap.keySet().iterator();
+        while (keysIter.hasNext()) {
+            int age = keysIter.next();
+            Iterator<Human> temp = ageMap.get(age).iterator();
+            while (temp.hasNext()) {
+                Human human = temp.next();
+                res.putIfAbsent(age, new HashMap<>());
+                Map<Character, List<Human>> tempMap = res.get(age);
+                char first = human.getSurname().charAt(0);
+                tempMap.putIfAbsent(first, new ArrayList<>());
+                List<Human> list = res.get(age).get(first);
+                list.add(human);
+                list.sort((o1, o2) -> {
+                    String fullname1 = o1.getSurname() + " " + o1.getName() + " " + o1.getPatronymic();
+                    String fullname2 = o2.getSurname() + " " + o2.getName() + " " + o2.getPatronymic();
+                    return fullname2.compareTo(fullname1);
+                });
+            }
+        }
+        return res;
+    }
+
 }
