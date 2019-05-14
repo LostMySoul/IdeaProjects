@@ -4,18 +4,18 @@ import omsu.javaprojects.exceptions.IllegalAgeException;
 
 import java.util.Objects;
 
-public class Student extends Human{
+public class Student extends Human {
 
     private String facultyName;
 
     public Student(String surname, String name, String patronymic, int age, String facultyName) throws IllegalAgeException {
         super(surname, name, patronymic, age);
-        this.facultyName=facultyName;
+        this.facultyName = facultyName;
     }
 
     public Student(Student student) throws IllegalAgeException {
         super(student.getSurname(), student.getName(), student.getPatronymic(), student.getAge());
-        this.facultyName=student.facultyName;
+        this.facultyName = student.facultyName;
     }
 
     public String getFacultyName() {

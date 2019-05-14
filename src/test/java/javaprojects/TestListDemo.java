@@ -165,33 +165,6 @@ public class TestListDemo {
     }
 
     @Test
-    public void testMakeListFromSet() {
-        List<Human> res = new ArrayList<>();
-        Set<Human> obj = new HashSet<>();
-        obj.add(new Human("A", "Bbc", "Cdd", 18));
-        obj.add(new Human("A", "Aac", "Cdd", 78));
-        obj.add(new Human("A", "Abc", "Vdd", 178));
-        obj.add(new Human("Zebcd", "Abc", "Cdd", 14));
-        obj.add(new Human("A", "Dbc", "Cdd", 32));
-        obj.add(new Human("Esbcd", "Abc", "Cdd", 8));
-        obj.add(new Student("Esbcd", "Abc", "DDD", 87, "Ff"));
-        obj.add(new Student("Asbcd", "Abc", "Cdd", 82, "Fa"));
-        obj.add(new Human("A", "Bbc", "Cdd", 7));
-        obj.add(new Student("Esbcd", "Abc", "Add", 28, "FE"));
-        res.add(new Human("A", "Aac", "Cdd", 78));
-        res.add(new Human("A", "Abc", "Vdd", 178));
-        res.add(new Human("A", "Bbc", "Cdd", 18));
-        res.add(new Human("A", "Bbc", "Cdd", 7));
-        res.add(new Human("A", "Dbc", "Cdd", 32));
-        res.add(new Student("Asbcd", "Abc", "Cdd", 82, "Fa"));
-        res.add(new Student("Esbcd", "Abc", "Add", 28, "FE"));
-        res.add(new Human("Esbcd", "Abc", "Cdd", 8));
-        res.add(new Student("Esbcd", "Abc", "DDD", 87, "Ff"));
-        res.add(new Human("Zebcd", "Abc", "Cdd", 14));
-        assertEquals(ListDemo.makeListFromSet(obj), res);
-    }
-
-    @Test
     public void testIdentifyHumans() {
         Map<Integer, Human> mapId = new HashMap<>();
         Set<Integer> setOfId = new HashSet<>();
@@ -290,46 +263,4 @@ public class TestListDemo {
         assertEquals(ListDemo.getWithAge(input), map);
     }
 
-    @Test
-    public void getWithAgeAndChar() {
-        Set<Human> input = new HashSet<>();
-        Human h1 = new Human("AAA", "AAA", "AAA", 30);
-        Human h2 = new Human("BBB", "BBB", "BBB", 22);
-        Human h3 = new Human("ACC", "CCC", "CCC", 30);
-        Human h4 = new Human("DDD", "DDD", "DDD", 30);
-        Human h5 = new Human("EEE", "EEE", "EEE", 53);
-        input.add(h1);
-        input.add(h2);
-        input.add(h3);
-        input.add(h4);
-        input.add(h5);
-        Map<Integer, Map<Character, List<Human>>> map = new HashMap<>();
-
-        List<Human> temp = new ArrayList<>();
-        temp.add(h3);
-        temp.add(h1);
-        Map<Character, List<Human>> charMap = new HashMap<>();
-        charMap.put('A',temp);
-        map.put(30, charMap);
-
-        temp = new ArrayList<>();
-        temp.add(h4);
-        charMap.put('D',temp);
-        map.put(30, charMap);
-
-
-        temp = new ArrayList<>();
-        temp.add(h2);
-        charMap = new HashMap<>();
-        charMap.put('B',temp);
-        map.put(22, charMap);
-
-        temp = new ArrayList<>();
-        temp.add(h5);
-        charMap = new HashMap<>();
-        charMap.put('E',temp);
-        map.put(53, charMap);
-
-        assertEquals(ListDemo.ageCharMap(input), map);
-    }
 }
