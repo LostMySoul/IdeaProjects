@@ -8,27 +8,14 @@ public class Student extends Human{
 
     private String facultyName;
 
-    public Student(String surname, String name, String patronymic, int age) throws IllegalAgeException {
-        super(surname, name, patronymic, age);
-    }
-
-    public Student(Human freddy) {
-        super(freddy);
-    }
-
     public Student(String surname, String name, String patronymic, int age, String facultyName) throws IllegalAgeException {
         super(surname, name, patronymic, age);
         this.facultyName=facultyName;
     }
 
-    public Student(Human freddy, String facultyName) {
-        super(freddy);
-        this.facultyName=facultyName;
-    }
-
-    public Student(Student timmy) throws IllegalAgeException {
-        super(timmy.getSurname(), timmy.getName(), timmy.getPatronymic(), timmy.getAge());
-        this.facultyName=timmy.facultyName;
+    public Student(Student student) throws IllegalAgeException {
+        super(student.getSurname(), student.getName(), student.getPatronymic(), student.getAge());
+        this.facultyName=student.facultyName;
     }
 
     public String getFacultyName() {
