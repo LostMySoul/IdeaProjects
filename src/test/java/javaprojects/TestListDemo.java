@@ -14,60 +14,57 @@ public class TestListDemo {
     @Test
     public void testGetNumberOfStringsWithSameStartChar() {
         List<String> obj = new ArrayList<>();
-        obj.add("SsssaSSSS");
-        obj.add("Sdsadasd");
-        obj.add("SSSSSSSSssqffqf");
-        obj.add("SSSSdsadasSss");
-        obj.add("SsSsSsSs");
+        obj.add("Sad");
+        obj.add("Star");
+        obj.add("Sim");
         //
-        obj.add("ADs");
-        obj.add("sAdasfddv");
-        obj.add("qwddsfSdsfas");
-        obj.add("ddsdasdSsSsSs");
-        obj.add("ddsadad");
+        obj.add("bad");
+        obj.add("true");
+        obj.add("false");
         obj.add(" S");
         obj.add("");
         obj.add("_S");
-        obj.add("dsdasdS");
-        assertEquals(ListDemo.getNumberOfStringWithChar(obj, 'S'), 5);
+        assertEquals(ListDemo.getNumberOfStringWithChar(obj, 'S'), 3);
     }
 
     @Test
     public void testGetListSameSurnameWithOne() {
-        Human human = new Human("Jhonson", "Henry", "Baker", 45);
+        Human human = new Human("HUMAN", "HUMAN", "HUMAN", 45);
         List<Human> list = new ArrayList<>();
         List<Human> res = new ArrayList<>();
         list.add(new Human(human));
         res.add(new Human(human));
-        list.add(new Human("Ivanov", "Ivan", "Ivanovich", 66));
-        list.add(new Human("Jhonson", "Timmy", "Cloud", 25));
-        res.add(new Human("Jhonson", "Timmy", "Cloud", 25));
-        list.add(new Human("Jhonson", "Boris", "Petrovich", 125));
-        res.add(new Human("Jhonson", "Boris", "Petrovich", 125));
-        list.add(new Human("Jhonsons", "Boriz", "Zovich", 87));
-        list.add(new Human("Rainbower", "Zins", "Chovich", 77));
-        list.add(new Human("Watson", "Reobert", "Grober", 7));
+        list.add(new Human("AAA", "AAA", "AAA", 66));
+        list.add(new Human("HUMAN", "BBB", "BBB", 25));
+        res.add(new Human("HUMAN", "BBB", "BBB", 25));
+        list.add(new Human("HUMAN", "CCC", "CCC", 3));
+        res.add(new Human("HUMAN", "CCC", "CCC", 3));
+        list.add(new Human("HUMAN", "DDD", "DDD", 125));
+        res.add(new Human("HUMAN", "DDD", "DDD", 125));
+        list.add(new Human("EEE", "EEE", "EEE", 87));
+        list.add(new Human("FFF", "FFF", "FFF", 77));
+        list.add(new Human("GGG", "GGG", "GGG", 7));
         assertEquals(ListDemo.getListSameSurname(list, human), res);
     }
 
     @Test
     public void testDeleteOneFromList() {
-        Human human = new Human("Jhonson", "Henry", "Baker", 45);
+        Human human = new Human("HUMAN", "HUMAN", "HUMAN", 45);
         List<Human> list = new ArrayList<>();
         List<Human> res = new ArrayList<>();
-        list.add(new Human("Jhonson", "Henry", "Baker", 45));
-        list.add(new Human("Ivanov", "Ivan", "Ivanovich", 66));
-        res.add(new Human("Ivanov", "Ivan", "Ivanovich", 66));
-        list.add(new Human("Jhonson", "Timmy", "Cloud", 25));
-        res.add(new Human("Jhonson", "Timmy", "Cloud", 25));
-        list.add(new Human("Jhonson", "Boris", "Petrovich", 125));
-        res.add(new Human("Jhonson", "Boris", "Petrovich", 125));
-        list.add(new Human("Jhonsons", "Boriz", "Zovich", 87));
-        res.add(new Human("Jhonsons", "Boriz", "Zovich", 87));
-        list.add(new Human("Rainbower", "Zins", "Chovich", 77));
-        res.add(new Human("Rainbower", "Zins", "Chovich", 77));
-        list.add(new Human("Jhonson", "Reobert", "Grober", 7));
-        res.add(new Human("Jhonson", "Reobert", "Grober", 7));
+        list.add(new Human("HUMAN", "HUMAN", "HUMAN", 45));
+        list.add(new Human("AAA", "AAA", "AAA", 66));
+        list.add(new Human("BBB", "BBB", "BBB", 25));
+        list.add(new Human("DDD", "DDD", "DDD", 125));
+        list.add(new Human("EEE", "EEE", "EEE", 87));
+        list.add(new Human("FFF", "FFF", "FFF", 77));
+        list.add(new Human("GGG", "GGG", "GGG", 7));
+        res.add(new Human("AAA", "AAA", "AAA", 66));
+        res.add(new Human("BBB", "BBB", "BBB", 25));
+        res.add(new Human("DDD", "DDD", "DDD", 125));
+        res.add(new Human("EEE", "EEE", "EEE", 87));
+        res.add(new Human("FFF", "FFF", "FFF", 77));
+        res.add(new Human("GGG", "GGG", "GGG", 7));
         assertEquals(ListDemo.getListExcludeOne(list, human), res);
     }
 
@@ -131,36 +128,29 @@ public class TestListDemo {
     @Test
     public void testGetSetOfOldest() {
         List<Human> obj = new ArrayList<>();
-        obj.add(new Student("Kllda", "Adsds", "Qqadsa", 42, "Ll"));
-        obj.add(new Student("Sllda", "Adsds", "Qqadsa", 42, "Ll"));
-        obj.add(new Student("Zllda", "Adsds", "Qqadsa", 42, "Ll"));
-        obj.add(new Human("Kll", "Ads", "Dsa", 12));
-        obj.add(new Human("Kll", "Ads", "Dsa", 42));
-        obj.add(new Human("Sdll", "Ads", "Dsa", 42));
-        obj.add(new Human("SdKll", "Ads", "Dsa", 12));
-        obj.add(new Human("SdKll", "Ads", "Dsa", 12));
-        obj.add(new Student("Kllda", "Adsds", "Qqadsa", 42, "Ll"));
-        obj.add(new Student("Kllda", "Adsds", "Qqadsa", 72, "Ll"));
-        obj.add(new Human("SdKll", "Ads", "Dsa", 12));
-        obj.add(new Human("SdKll", "Ads", "Dsa", 12));
-        obj.add(new Human("dsdKllda", "sAdsds", "Qqadsa", 52));
-        obj.add(new Student("Kllda", "Adsds", "Qqadsa", 82, "Ll"));
-        obj.add(new Student("QqKllda", "Adsds", "Qqadsa", 82, "LlD"));
-        obj.add(new Student("QqKllda", "Adsds", "Qqadsa", 82, "Ll"));
-        obj.add(new Student("Kllda", "Adsds", "Qqadsa", 82, "Ll"));
-        obj.add(new Human("Adsllda", "aAdsds", "Qqadsa", 82));
-        obj.add(new Human("AdsKllda", "Adsds", "Qqadsa", 82));
-        obj.add(new Human("Kllda", "Adsds", "Qqadsa", 82));
-        obj.add(new Human("Qllda", "Xdsds", "Cqadsa", 82));
+        obj.add(new Human("AAA", "AAA", "AAA", 52));
+        obj.add(new Human("BBB", "BBB", "BBB", 12));
+        obj.add(new Human("CCC", "CCC", "CCC", 42));
+        obj.add(new Human("DDD", "DDD", "DDD", 42));
+        obj.add(new Human("EEE", "EEE", "EEE", 12));
+        obj.add(new Student("FFF", "FFF", "FFF", 42, "FFF"));
+        obj.add(new Student("GGG", "GGG", "GGG", 72, "GGG"));
+        obj.add(new Human("HHH", "HHH", "HHH", 82));
+        obj.add(new Human("III", "III", "III", 82));
+        obj.add(new Human("JJJ", "JJJ", "JJJ", 82));
+        obj.add(new Human("KKK", "KKK", "KKK", 82));
+        obj.add(new Student("LLL", "LLL", "LLL", 82, "LLL"));
+        obj.add(new Student("MMM", "MMM", "MMM", 82, "MMM"));
+        obj.add(new Student("NNN", "NNN", "NNN", 82, "NNN"));
 
         Set<Human> res = new HashSet<>();
-        res.add(new Human("Kllda", "Adsds", "Qqadsa", 82));
-        res.add(new Human("Qllda", "Xdsds", "Cqadsa", 82));
-        res.add(new Human("Adsllda", "aAdsds", "Qqadsa", 82));
-        res.add(new Human("AdsKllda", "Adsds", "Qqadsa", 82));
-        res.add(new Student("Kllda", "Adsds", "Qqadsa", 82, "Ll"));
-        res.add(new Student("QqKllda", "Adsds", "Qqadsa", 82, "Ll"));
-        res.add(new Student("QqKllda", "Adsds", "Qqadsa", 82, "LlD"));
+        res.add(new Human("HHH", "HHH", "HHH", 82));
+        res.add(new Human("III", "III", "III", 82));
+        res.add(new Human("JJJ", "JJJ", "JJJ", 82));
+        res.add(new Human("KKK", "KKK", "KKK", 82));
+        res.add(new Student("LLL", "LLL", "LLL", 82, "LLL"));
+        res.add(new Student("MMM", "MMM", "MMM", 82, "MMM"));
+        res.add(new Student("NNN", "NNN", "NNN", 82, "NNN"));
         assertEquals(ListDemo.getSetOfOldest(obj), res);
     }
 
@@ -169,23 +159,23 @@ public class TestListDemo {
         Map<Integer, Human> mapId = new HashMap<>();
         Set<Integer> setOfId = new HashSet<>();
         Set<Human> res = new HashSet<>();
-        mapId.put(1, new Human("Fdd", "Adds", "Acss", 14));
+        mapId.put(1, new Human("AAA", "AAA", "AAA", 14));
         setOfId.add(1);
-        res.add(new Human("Fdd", "Adds", "Acss", 14));
-        mapId.put(2, new Human("Edd", "Redsds", "Vbss", 30));
+        res.add(new Human("AAA", "AAA", "AAA", 14));
+        mapId.put(2, new Human("BBB", "BBB", "BBB", 30));
         setOfId.add(2);
-        res.add(new Human("Edd", "Redsds", "Vbss", 30));
-        mapId.put(22, new Human("Zss", "Forsds", "Qrss", 22));
+        res.add(new Human("BBB", "BBB", "BBB", 30));
+        mapId.put(22, new Human("CCC", "CCC", "CCC", 22));
         setOfId.add(22);
-        res.add(new Human("Zss", "Forsds", "Qrss", 22));
-        mapId.put(25, new Human("Oppsd", "Klos", "Lks", 53));
+        res.add(new Human("CCC", "CCC", "CCC", 22));
+        mapId.put(25, new Human("DDD", "DDD", "DDD", 53));
         setOfId.add(25);
-        res.add(new Human("Oppsd", "Klos", "Lks", 53));
-        mapId.put(117, new Human("Black", "Monds", "Qwre", 1));
+        res.add(new Human("DDD", "DDD", "DDD", 53));
+        mapId.put(117, new Human("EEE", "EEE", "EEE", 1));
         setOfId.add(117);
-        res.add(new Human("Black", "Monds", "Qwre", 1));
-        mapId.put(220, new Human("AsdfZss", "Forsds", "Qrss", 22));
-        mapId.put(22475, new Human("QrZss", "GfsdForsds", "SDdQrss", 22));
+        res.add(new Human("EEE", "EEE", "EEE", 1));
+        mapId.put(220, new Human("FFF", "FFF", "FFF", 22));
+        mapId.put(22475, new Human("GGG", "GGG", "GGG", 22));
         setOfId.add(2774);
         setOfId.add(36);
         setOfId.add(3);
@@ -200,18 +190,18 @@ public class TestListDemo {
     public void testGetIdAge() {
         Map<Integer, Human> mapId = new HashMap<>();
         Set<Integer> res = new HashSet<>();
-        mapId.put(1, new Human("Fdd", "Adds", "Acss", 14));
-        mapId.put(2, new Human("Edd", "Redsds", "Vbss", 30));
+        mapId.put(1, new Human("AAA", "AAA", "AAA", 14));
+        mapId.put(2, new Human("BBB", "BBB", "BBB", 30));
         res.add(2);
-        mapId.put(22, new Human("Zss", "Forsds", "Qrss", 22));
+        mapId.put(22, new Human("CCC", "CCC", "CCC", 22));
         res.add(22);
-        mapId.put(220, new Human("AsdfZss", "Forsds", "Qrss", 22));
+        mapId.put(220, new Human("DDD", "DDD", "DDD", 22));
         res.add(220);
-        mapId.put(22475, new Human("QrZss", "GfsdForsds", "SDdQrss", 17));
-        mapId.put(25, new Human("Oppsd", "Klos", "Lks", 53));
+        mapId.put(22475, new Human("EEE", "EEE", "EEE", 17));
+        mapId.put(25, new Human("FFF", "FFF", "FFF", 53));
         res.add(25);
-        mapId.put(117, new Human("Black", "Monds", "Qwre", 1));
-        mapId.put(2117, new Human("Redflack", "Monds", "Qwre", 18));
+        mapId.put(117, new Human("GGG", "GGG", "GGG", 1));
+        mapId.put(2117, new Human("HHH", "HHH", "HHH", 18));
         res.add(2117);
         assertEquals(ListDemo.getIdOfFullAged(mapId), res);
     }
@@ -220,13 +210,13 @@ public class TestListDemo {
     public void testIdAgeMap() {
         Map<Integer, Human> mapId = new HashMap<>();
         Map<Integer, Integer> idAgeMap = new HashMap<>();
-        mapId.put(1, new Human("Fdd", "Adds", "Acss", 14));
+        mapId.put(1, new Human("AAA", "AAA", "AAA", 14));
         idAgeMap.put(1, 14);
-        mapId.put(2, new Human("Edd", "Redsds", "Vbss", 30));
+        mapId.put(2, new Human("BBB", "BBB", "BBB", 30));
         idAgeMap.put(2, 30);
-        mapId.put(117, new Human("Black", "Monds", "Qwre", 1));
+        mapId.put(117, new Human("CCC", "CCC", "CCC", 1));
         idAgeMap.put(117, 1);
-        mapId.put(2117, new Human("Redflack", "Monds", "Qwre", 18));
+        mapId.put(2117, new Human("DDD", "DDD", "DDD", 18));
         idAgeMap.put(2117, 18);
         assertEquals(ListDemo.getIdAgeMap(mapId), idAgeMap);
     }

@@ -5,7 +5,6 @@ import omsu.javaprojects.exceptions.IllegalAgeException;
 import java.util.Objects;
 
 public class Human {
-
     private String surname, name, patronymic;
     private int age;
 

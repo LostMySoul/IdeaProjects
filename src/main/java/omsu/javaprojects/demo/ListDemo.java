@@ -51,7 +51,7 @@ public class ListDemo {
         List<Set<Integer>> result = new ArrayList<>();
         for (int i = 0; i < setList.size(); i++) {
             Set<Integer> temp = new HashSet<>(setList.get(i));
-            temp.retainAll(set);//retainAll удаляет все элементы из temp, который не содержатся в set
+            temp.retainAll(set); //retainAll удаляет все элементы из temp, который не содержатся в set
             if (temp.size() == 0) {
                 result.add(setList.get(i));
             }
@@ -78,10 +78,7 @@ public class ListDemo {
     //7
     public static Set<Human> identifyHumans(Map<Integer, Human> mapId, Set<Integer> setOfId) {
         Set<Human> result = new HashSet<>();
-        Iterator<Integer> itr = setOfId.iterator();
-        int id;
-        while (itr.hasNext()) {
-            id = itr.next();
+        for (Integer id : setOfId) {
             if (mapId.get(id) != null) {
                 result.add(mapId.get(id));
             }
@@ -92,10 +89,7 @@ public class ListDemo {
     //8
     public static Set<Integer> getIdOfFullAged(Map<Integer, Human> mapId) {
         Set<Integer> result = new HashSet<>();
-        Iterator<Integer> iterKeys = mapId.keySet().iterator();
-        int id;
-        while (iterKeys.hasNext()) {
-            id = iterKeys.next();
+        for(Integer id: mapId.keySet()){
             if (mapId.get(id).getAge() >= 18) {
                 result.add(id);
             }
@@ -105,10 +99,9 @@ public class ListDemo {
 
     //9
     public static Map<Integer, Integer> getIdAgeMap(Map<Integer, Human> humanMap) {
-        List<Integer> keys = new ArrayList<>(humanMap.keySet());
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0; i < keys.size(); i++) {
-            map.put(keys.get(i), humanMap.get(keys.get(i)).getAge());
+        for(Integer id: humanMap.keySet()){
+            map.put(id, humanMap.get(id).getAge());
         }
         return map;
     }
@@ -116,9 +109,7 @@ public class ListDemo {
     //10
     public static Map<Integer, List<Human>> getWithAge(Set<Human> humanSet) {
         Map<Integer, List<Human>> res = new HashMap<>();
-        Iterator<Human> iter = humanSet.iterator();
-        while (iter.hasNext()) {
-            Human human = iter.next();
+        for(Human human: humanSet){
             List<Human> temp = res.get(human.getAge());
             if (temp == null) {
                 temp = new ArrayList<>();
