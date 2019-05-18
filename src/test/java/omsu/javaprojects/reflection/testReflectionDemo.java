@@ -20,10 +20,11 @@ public class testReflectionDemo {
         objectList.add(new Human("AAA", "AAA", "AAA", 1998));
         objectList.add(new Human("BBB", "BBB", "BBB", 1997));
         objectList.add(new Human("CCC", "CCC", "CCC", 1995));
+        objectList.add(new Student("CCC", "CCC", "CCC", 1995,"facul"));
         objectList.add(new Group(1, 1, 2, 5));
         objectList.add(new Object());
         objectList.add("someString");
-        assertEquals(ReflectionDemo.countHuman(objectList), 3);
+        assertEquals(ReflectionDemo.countHuman(objectList), 4);
     }
     @Test
     public void testListName(){

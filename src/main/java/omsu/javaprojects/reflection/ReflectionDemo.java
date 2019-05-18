@@ -15,9 +15,7 @@ public class ReflectionDemo {
         for (Object item : objectList) {
             if (item instanceof Human) {
                 count++;
-
             }
-
         }
         return count;
     }
@@ -37,8 +35,6 @@ public class ReflectionDemo {
         while (cl != null) {
             result.add(cl.getSimpleName());
             cl = cl.getSuperclass();
-
-
         }
         return result;
     }
