@@ -30,7 +30,7 @@ public class testStreamApiDemo {
         list.add(new Human("", "", "", Gender.FEMALE, 1));
         list.add(null);
         list.add("another Str");
-        assertEquals(StreamApiDemo.removeNull.get(list).size(), 4);
+        assertEquals(StreamApiDemo.removeNull.apply(list).size(), 4);
     }
 
     @Test
@@ -44,37 +44,37 @@ public class testStreamApiDemo {
         ints.add(-5);
         ints.add(-3);
         ints.add(-1);
-        assertEquals(StreamApiDemo.positiveCount.get(ints), 5);
+        assertEquals(StreamApiDemo.positiveCount.apply(ints), new Long(5));
     }
 
     @Test
     public void testLastElements() {
         List<Object> list = Arrays.asList("A", "B", "C", "D");
-        assertEquals(StreamApiDemo.lastElements.get(list).size(), 3);
+        assertEquals(StreamApiDemo.lastElements.apply(list).size(), 3);
     }
 
     @Test
     public void testFirstEven() {
         List<Integer> list = Arrays.asList(1, 3, 4, 2);
-        assertEquals(StreamApiDemo.firstEven.get(list), new Integer(4));
+        assertEquals(StreamApiDemo.firstEven.apply(list), new Integer(4));
         list = Arrays.asList(2, 3, 4, 2);
-        assertEquals(StreamApiDemo.firstEven.get(list), new Integer(2));
+        assertEquals(StreamApiDemo.firstEven.apply(list), new Integer(2));
         list = Arrays.asList(1, 3, 5);
-        assertNull(StreamApiDemo.firstEven.get(list));
+        assertNull(StreamApiDemo.firstEven.apply(list));
     }
 
     @Test
     public void testQuadSet() {
         Integer[] list = {1, 3, 3, 4, 5};
         Integer[] expected = {1, 9, 16, 25};
-        assertEquals(StreamApiDemo.quadSet.get(list), Arrays.asList(expected));
+        assertEquals(StreamApiDemo.quadSet.apply(list), Arrays.asList(expected));
     }
 
     @Test
     public void testNotEmptyString() {
         List<String> list = Arrays.asList("A", "B", "", "C", "D", "");
         List<String> expected = Arrays.asList("A", "B", "C", "D");
-        assertEquals(StreamApiDemo.notEmptyStringList.get(list), expected);
+        assertEquals(StreamApiDemo.notEmptyStringList.apply(list), expected);
     }
 
     @Test
@@ -85,8 +85,8 @@ public class testStreamApiDemo {
         strs.add("aaa");
         strs.add("bbb");
         strs.add("ccc");
-        List<String> expected = Arrays.asList("aaa", "bbb", "ccc", "ddd", "eee");
-        assertEquals(StreamApiDemo.setToSortedList.get(strs), expected);
+        List<String> expected = Arrays.asList("eee", "ddd", "ccc", "bbb", "aaa");
+        assertEquals(StreamApiDemo.setToSortedList.apply(strs), expected);
     }
 
     @Test
@@ -97,19 +97,19 @@ public class testStreamApiDemo {
         ints.add(3);
         ints.add(5);
         ints.add(10);
-        assertEquals(StreamApiDemo.quadSum.get(ints), new Integer(139));
+        assertEquals(StreamApiDemo.quadSum.apply(ints), new Integer(139));
     }
 
     @Test
     public void testMaxAge() {
-        assertEquals(StreamApiDemo.maxAge.get(Arrays.asList(arr)), new Integer(44));
+        assertEquals(StreamApiDemo.maxAge.apply(Arrays.asList(arr)), new Integer(44));
     }
 
     @Test
     public void testGenderAgeSorted(){
         assertEquals(
                 Arrays.asList(arr[2],arr[0],arr[1],arr[3]),
-                StreamApiDemo.genderAgeSorted.get(Arrays.asList(arr))
+                StreamApiDemo.genderAgeSorted.apply(Arrays.asList(arr))
         );
     }
 
